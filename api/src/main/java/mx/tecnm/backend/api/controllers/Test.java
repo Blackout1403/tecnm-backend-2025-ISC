@@ -1,12 +1,10 @@
 package mx.tecnm.backend.api.controllers;
 
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import mx.tecnm.backend.api.models.Producto;
 
 
 @RequestMapping("/test")
@@ -18,6 +16,7 @@ public class Test {
         return "Hola API rest";
     }
 
+    /* 
     @GetMapping("/producto")
     public Producto getProducto(){
         Producto p = new Producto();
@@ -77,8 +76,8 @@ public class Test {
         return ResponseEntity.ok(resultado);
 
 
-    }
-    
+    } 
+    */
 
     
 }
