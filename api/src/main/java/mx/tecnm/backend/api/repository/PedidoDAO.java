@@ -6,32 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-
-import mx.tecnm.backend.api.models.Categoria;
-import mx.tecnm.backend.api.models.Categoria.categoria;
+import mx.tecnm.backend.api.models.Pedido;
+import mx.tecnm.backend.api.models.Pedido.pedido;
 
 @Repository
-
-public class CategoriaDAO {
+public class PedidoDAO {
 
     @Autowired
    private JdbcClient conexion;
 
-    public List<categoria> consultarCategorias() {
-     String sql = "SELECT id, nombre FROM categorias";
+    public List<pedido> consultarPedidos() {
+     String sql = "SELECT id, numero, importe_productos FROM pedidos";
      return conexion.sql(sql)
-        .query((rs, rowNum) -> new Categoria.categoria(
+        .query((rs, rowNum) -> new Pedido.pedido(
             rs.getInt("id"),
-            rs.getString("nombre")))
+            rs.getString("numero"),
+            rs.getString("importe_productos")))
         .list();
 
     }
-
-
-
-
-    }
-
-
-
-
+}
