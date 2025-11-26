@@ -15,7 +15,7 @@ public class DetalleCarritoDAO {
     @Autowired
    private JdbcClient conexion;
     public List<detallecarrito> consultarDetalleCarritos() {
-     String sql = "SELECT id, cantidad, precio FROM DetalleCarritos.detallecarritos";
+     String sql = "SELECT id, cantidad, precio FROM detalles_carrito";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new DetalleCarrito.detallecarrito(
             rs.getInt("id"),
