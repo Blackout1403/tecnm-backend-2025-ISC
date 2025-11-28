@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import mx.tecnm.backend.api.models.Usuario.usuarios;
+import mx.tecnm.backend.api.models.Usuario;
 import mx.tecnm.backend.api.repository.UsuarioDAO;
 
 @RestController
@@ -21,8 +21,8 @@ public class UsuarioController {
 
 
     @GetMapping()
-    public ResponseEntity<List<usuarios>> obtenerUsuario() {
-        List<usuarios> usuarios = repo.consultarUsuario();
+    public ResponseEntity<List<Usuario>> obtenerUsuario() {
+        List<Usuario> usuarios = repo.consultarUsuario();
         return ResponseEntity.ok(usuarios);
     } 
 }

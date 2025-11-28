@@ -1,8 +1,6 @@
 package mx.tecnm.backend.api.models;
 
-public class Usuario {
 
- public record usuarios(int id, String nombre) {
+ public record Usuario(int id, String nombre) {
     }
 
-}

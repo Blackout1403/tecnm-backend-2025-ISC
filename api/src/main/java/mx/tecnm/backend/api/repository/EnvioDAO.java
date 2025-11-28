@@ -7,17 +7,17 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import mx.tecnm.backend.api.models.Envio;
-import mx.tecnm.backend.api.models.Envio.envio;
+
 
 @Repository
 public class EnvioDAO {
 
     @Autowired
    private JdbcClient conexion;
-   public List<envio> consultarEnvios() {
+   public List<Envio> consultarEnvios() {
      String sql = "SELECT id, fecha, numero_seguimiento, estado FROM envios";
      return conexion.sql(sql)
-        .query((rs, rowNum) -> new Envio.envio(
+        .query((rs, rowNum) -> new Envio(
             rs.getInt("id"),
             rs.getString("fecha"),
             rs.getString("numero_seguimiento"),

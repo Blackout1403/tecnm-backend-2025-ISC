@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.tecnm.backend.api.models.Domicilio.domicilio;
+import mx.tecnm.backend.api.models.Domicilio;
 import mx.tecnm.backend.api.repository.DomicilioDAO;
 
 @RestController
@@ -20,8 +20,8 @@ public class DomicilioController {
     DomicilioDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<domicilio>> obtenerDomicilios() {
-        List<domicilio> domicilios = repo.consultarDomicilios();
+    public ResponseEntity<List<Domicilio>> obtenerDomicilios() {
+        List<Domicilio> domicilios = repo.consultarDomicilios();
         return ResponseEntity.ok(domicilios);
     }
 }

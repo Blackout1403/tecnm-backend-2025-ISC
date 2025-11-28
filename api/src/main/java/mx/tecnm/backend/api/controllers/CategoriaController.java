@@ -2,13 +2,16 @@ package mx.tecnm.backend.api.controllers;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
 
-import mx.tecnm.backend.api.models.Categoria.categoria;
+import mx.tecnm.backend.api.models.Categoria;
+
 import mx.tecnm.backend.api.repository.CategoriaDAO;
 
 @RestController
@@ -19,9 +22,15 @@ public class CategoriaController {
     CategoriaDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<categoria>> obtenerCategorias() {
-        List<categoria> categorias = repo.consultarCategorias();
+    public ResponseEntity<List<Categoria>> obtenerCategorias() {
+        List<Categoria> categorias = repo.consultarCategorias();
         return ResponseEntity.ok(categorias);
     } 
+
+    @PostMapping()
+    public ResponseEntity<Categoria> crearcategoria(@RequestParam String nuevaCategoria) {
+        Categoria categoriacreada = repo.crearcategoria (nuevaCategoria);
+        return ResponseEntity.created(null).body(categoriacreada);
+    }
 
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.tecnm.backend.api.models.Producto.producto;
+import mx.tecnm.backend.api.models.Producto;
 import mx.tecnm.backend.api.repository.ProductoDAO;
 
 @RestController
@@ -19,8 +19,8 @@ public class ProductoController {
         ProductoDAO repo;
 
         @GetMapping()
-        public ResponseEntity<List<producto>> obtenerProductos() {
-            List<producto> productos = repo.consultarProductos();
+        public ResponseEntity<List<Producto>> obtenerProductos() {
+            List<Producto> productos = repo.consultarProductos();
             return ResponseEntity.ok(productos);
 
 

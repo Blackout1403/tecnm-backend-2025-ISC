@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import mx.tecnm.backend.api.models.DetallePedido;
-import mx.tecnm.backend.api.models.DetallePedido.detallepedido;
+
 
 @Repository
 public class DetallePedidoDAO {
@@ -15,10 +15,10 @@ public class DetallePedidoDAO {
     @Autowired
    private JdbcClient conexion;
 
-    public List<detallepedido> consultarDetallePedidos() {
+    public List<DetallePedido> consultarDetallePedidos() {
      String sql = "SELECT id, cantidad, precio FROM detalles_pedido";
      return conexion.sql(sql)
-        .query((rs, rowNum) -> new DetallePedido.detallepedido(
+        .query((rs, rowNum) -> new DetallePedido(
             rs.getInt("id"),
             rs.getString("cantidad"),
             rs.getString("precio")))

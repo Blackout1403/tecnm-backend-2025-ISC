@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import mx.tecnm.backend.api.models.MetodoPago.metodopago;
+import mx.tecnm.backend.api.models.MetodoPago;
 import mx.tecnm.backend.api.repository.MetodoPagoDAO;
 
 @RestController
@@ -23,8 +23,8 @@ public class MetodoPagoController {
     MetodoPagoDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<metodopago>> obtenerMetodosPago() {
-        List<metodopago> metodospago = repo.consultarMetodosPago();
+    public ResponseEntity<List<MetodoPago>> obtenerMetodosPago() {
+        List<MetodoPago> metodospago = repo.consultarMetodosPago();
        return ResponseEntity.ok(metodospago);
 
 }

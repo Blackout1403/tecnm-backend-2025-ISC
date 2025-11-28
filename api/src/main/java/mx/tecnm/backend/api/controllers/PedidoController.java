@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import mx.tecnm.backend.api.models.Pedido.pedido;
+import mx.tecnm.backend.api.models.Pedido;
 import mx.tecnm.backend.api.repository.PedidoDAO;
 
 @RestController
@@ -21,8 +21,8 @@ public class PedidoController {
     PedidoDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<pedido>> obtenerPedidos() {
-        List<pedido> pedidos = repo.consultarPedidos();
+    public ResponseEntity<List<Pedido>> obtenerPedidos() {
+        List<Pedido> pedidos = repo.consultarPedidos();
         return ResponseEntity.ok(pedidos);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.tecnm.backend.api.models.DetalleCarrito.detallecarrito;
+import mx.tecnm.backend.api.models.DetalleCarrito;
 import mx.tecnm.backend.api.repository.DetalleCarritoDAO;
 
 @RestController
@@ -19,8 +19,8 @@ public class DetalleCarritoController {
     DetalleCarritoDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<detallecarrito>> obtenerDetalleCarritos() {
-        List<detallecarrito> detalleCarritos = repo.consultarDetalleCarritos();
+    public ResponseEntity<List<DetalleCarrito>> obtenerDetalleCarritos() {
+        List<DetalleCarrito> detalleCarritos = repo.consultarDetalleCarritos();
         return ResponseEntity.ok(detalleCarritos);
     }
 

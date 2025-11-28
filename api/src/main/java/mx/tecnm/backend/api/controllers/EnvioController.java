@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.tecnm.backend.api.models.Envio.envio;
+import mx.tecnm.backend.api.models.Envio;
 import mx.tecnm.backend.api.repository.EnvioDAO;
 
 @RestController
@@ -19,8 +19,8 @@ public class EnvioController {
     EnvioDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<envio>> obtenerEnvios() {
-        List<envio> envios = repo.consultarEnvios();
+    public ResponseEntity<List<Envio>> obtenerEnvios() {
+        List<Envio> envios = repo.consultarEnvios();
         return ResponseEntity.ok(envios);
     } 
 }
