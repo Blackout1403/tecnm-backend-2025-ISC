@@ -1,8 +1,10 @@
 package mx.tecnm.backend.api.controllers;
 
 
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,4 +35,23 @@ public class CategoriaController {
         return ResponseEntity.created(null).body(categoriacreada);
     }
 
+    @GetMapping("/buscarid")
+    public ResponseEntity<List<Categoria>> busquedaID(@RequestParam int id) {
+        List<Categoria> categorias = repo.busquedaID(id);
+        return ResponseEntity.ok(categorias);
+}
+
+    @PutMapping()
+    public ResponseEntity<Categoria> actualizarCategoria(@RequestParam int id, @RequestParam String Nuevonombre) {
+        Categoria categoriaActualizada = repo.actualizarCategoria(id, Nuevonombre);
+        return ResponseEntity.ok(categoriaActualizada);
+
+
+}
+    @PutMapping("/desactivar")
+    public ResponseEntity<List<Categoria>> desactivar(@RequestParam int id, @RequestParam boolean activo) {
+        List<Categoria> desactivar = repo.desactivar(id, activo);
+        return ResponseEntity.ok(desactivar); 
+
+    }
 }

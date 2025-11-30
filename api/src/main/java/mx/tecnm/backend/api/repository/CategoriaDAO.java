@@ -38,6 +38,40 @@ public class CategoriaDAO {
            
 
     }
+
+    public List<Categoria> busquedaID(int id) {
+     String sql = "SELECT * FROM categorias WHERE id = (?)";
+     return conexion.sql(sql)
+        .param(id)
+        .query((rs, rowNum) -> new Categoria(
+          rs.getInt("id"),
+         rs.getString("nombre")))
+        .list();
+            
+    }
+
+    public Categoria actualizarCategoria(int id, String Nuevonombre) {
+        String sql = "UPDATE categorias SET nombre = (?) WHERE id = (?) RETURNING id, nombre";
+       return conexion.sql(sql)
+            .param(Nuevonombre)
+            .param(id)
+            .query((rs, rowNum) -> new Categoria(
+                rs.getInt("id"),
+                rs.getString("nombre")))
+        .single();
+           
+
+    }
+    public List<Categoria> desactivar(int id, boolean activo) {
+        String sql = "UPDATE categorias SET activo = (?) WHERE id = (?) returning id, nombre, activo";
+       return conexion.sql(sql)
+            .param(activo)
+            .param(id)
+            .query((rs, rowNum) -> new Categoria(
+                rs.getInt("id"),
+                rs.getString("nombre")))
+        .list();
+    }
 }
 
 
