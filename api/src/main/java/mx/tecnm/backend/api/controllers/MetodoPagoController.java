@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -23,6 +26,17 @@ public class MetodoPagoController {
     public ResponseEntity<List<MetodoPago>> obtenerMetodosPago() {
         List<MetodoPago> metodospago = repo.consultarMetodosPago();
        return ResponseEntity.ok(metodospago);
+    }
 
-}
+    @PostMapping()
+    public ResponseEntity<MetodoPago> agregarMetodoPago(@RequestParam String nombre, @RequestParam double comision) {
+        MetodoPago nuevoMetodoPago = repo.agregarMetodoPago(nombre, comision);
+        return ResponseEntity.ok(nuevoMetodoPago);
+    }
+
+    @PutMapping()
+    public ResponseEntity<MetodoPago> actualizarMetodoPago(@RequestParam int id, @RequestParam String nombre, @RequestParam double comision) {
+        MetodoPago metodoPagoActualizado = repo.actualizarMetodoPago(id, nombre, comision);
+        return ResponseEntity.ok(metodoPagoActualizado);
+    }
 }

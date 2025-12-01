@@ -18,8 +18,93 @@ public class UsuarioDAO {
      return conexion.sql(sql)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
             rs.getInt("id"),
-            rs.getString("nombre")))
+            rs.getString("nombre"),
+            rs.getString("email"),
+            rs.getString("telefono"),
+            rs.getString("sexo"),
+            rs.getDate("Fecha_nacimineto"),
+            rs.getString("contrasena"),
+            rs.getDate("fecha_registro")))
+
         .list();
             
     }
+
+    public Usuario agregarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimineto, String contrasena, java.sql.Date fecha_registro) {
+        String sql = "INSERT INTO usuarios (nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro) VALUES (?,?,?,?,?,?,?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+        return conexion.sql(sql)
+            .param(nombre)
+            .param(email)
+            .param(telefono)
+            .param(sexo)
+            .param(Fecha_nacimineto)
+            .param(contrasena)
+            .param(fecha_registro)
+            .query((rs, rowNum) -> new Usuario(
+                rs.getInt("id"),
+                rs.getString("nombre"),
+                rs.getString("email"),
+                rs.getString("telefono"),
+                rs.getString("sexo"),
+                rs.getDate("Fecha_nacimineto"),
+                rs.getString("contrasena"),
+                rs.getDate("fecha_registro")))
+            .single();
+    }
+
+    public Usuario actualizarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimineto, String contrasena, java.sql.Date fecha_registro) {
+        String sql = "UPDATE usuarios SET nombre = (?), email = (?), telefono = (?), sexo = (?), fecha_nacimiento = (?), contrasena = (?), fecha_registro = (?) WHERE id = ? RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+        return conexion.sql(sql)
+            .param(id)
+            .param(nombre)
+            .param(email)
+            .param(telefono)
+            .param(sexo)
+            .param(Fecha_nacimineto)
+            .param(contrasena)
+            .param(fecha_registro)
+            .query((rs, rowNum) -> new Usuario(
+                rs.getInt("id"),
+                rs.getString("nombre"),
+                rs.getString("email"),
+                rs.getString("telefono"),
+                rs.getString("sexo"),
+                rs.getDate("Fecha_nacimineto"),
+                rs.getString("contrasena"),
+                rs.getDate("fecha_registro")))
+            .single();
+    }
+
+    public List<Usuario> busquedaID(int id) {
+     String sql = "SELECT * FROM usuarios WHERE id = (?)";
+     return conexion.sql(sql)
+        .param(id)
+        .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
+          rs.getInt("id"),
+                rs.getString("nombre"),
+                rs.getString("email"),
+                rs.getString("telefono"),
+                rs.getString("sexo"),
+                rs.getDate("Fecha_nacimineto"),
+                rs.getString("contrasena"),
+                rs.getDate("fecha_registro")))
+        .list();
+    }
+
+    public List<Usuario> eliminarUsuario(int id, boolean activo) {
+        String sql = "DELETE FROM usuarios WHERE id = (?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+       return conexion.sql(sql)
+            .param(id)
+            .param(activo)
+            .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
+              rs.getInt("id"),
+                rs.getString("nombre"),
+                rs.getString("email"),
+                rs.getString("telefono"),
+                rs.getString("sexo"),
+                rs.getDate("Fecha_nacimineto"),
+                rs.getString("contrasena"),
+                rs.getDate("fecha_registro")))
+            .list();
+            }
 }

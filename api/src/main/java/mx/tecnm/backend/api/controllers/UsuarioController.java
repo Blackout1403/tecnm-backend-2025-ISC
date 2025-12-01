@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -29,14 +30,16 @@ public class UsuarioController {
     } 
 
     @PostMapping()
-    public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
-        Usuario nuevoUsuario = repo.agregarUsuario(usuario);
+    public ResponseEntity<Usuario> agregarUsuario(@RequestParam int id, @RequestParam String nombre, @RequestParam String email, @RequestParam String telefono, @RequestParam String sexo, @RequestParam java.sql.Date Fecha_nacimineto, @RequestParam String contrasena, @RequestParam java.sql.Date fecha_registro) {
+        Usuario nuevoUsuario = repo.agregarUsuario(id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro);
         return ResponseEntity.ok(nuevoUsuario);
     }
 
     @PutMapping()
-    public ResponseEntity<Usuario> actualizarUsuario(Usuario usuario) {
-        usuario = repo.agregarUsuario(usuario);   
-        return ResponseEntity.ok(usuario);
-    }
+    public ResponseEntity<Usuario> actualizarUsuario(@RequestParam int id, @RequestParam String nombre, @RequestParam String email, @RequestParam String telefono, @RequestParam String sexo, @RequestParam java.sql.Date Fecha_nacimineto, @RequestParam String contrasena, @RequestParam java.sql.Date fecha_registro) {
+        Usuario usuarioActualizado = repo.actualizarUsuario(id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro);
+        return ResponseEntity.ok(usuarioActualizado);
+    }  
+
+
 }
