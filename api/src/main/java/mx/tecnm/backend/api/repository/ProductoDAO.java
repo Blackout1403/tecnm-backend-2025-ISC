@@ -15,7 +15,7 @@ public class ProductoDAO {
    private JdbcClient conexion;
 
     public List<Producto> consultarProductos() {
-     String sql = "SELECT * FROM productos";
+     String sql = "SELECT * FROM productos WHERE activo = TRUE";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Producto(
           rs.getInt("id"),
@@ -68,7 +68,7 @@ public class ProductoDAO {
     }
 
     public List<Producto> busquedaID(int id) {
-     String sql = "SELECT * FROM productos WHERE id = (?)";
+     String sql = "SELECT * FROM productos WHERE id = (?) AND activo = TRUE";
      return conexion.sql(sql)
         .param(id)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Producto(
@@ -89,7 +89,7 @@ public class ProductoDAO {
 }
 
     public List<Producto> actualizarProducto(int id, String nombre, double precioProducto, String sku, String color, String marca, String descripcion, double peso, double alto, double ancho, double profundidad, int categorias_id) {
-        String sql = "UPDATE productos SET nombre = (?), precio = (?), sku = (?), color = (?), marca = (?), descripcion = (?), peso = (?), alto = (?), ancho = (?), profundidad = (?), categorias_id = (?) WHERE id = (?) RETURNING id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id";
+        String sql = "UPDATE productos SET nombre = (?), precio = (?), sku = (?), color = (?), marca = (?), descripcion = (?), peso = (?), alto = (?), ancho = (?), profundidad = (?), categorias_id = (?) WHERE id = (?)  RETURNING id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id";
        return conexion.sql(sql)
             .param(nombre)
             .param(precioProducto)
@@ -120,10 +120,9 @@ public class ProductoDAO {
            
 
     }
-    public List<Producto> desactivar(int id, boolean activo) {
-        String sql = "UPDATE productos SET activo = (?) WHERE id = (?) returning id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id, activo";
+    public List<Producto> desactivar(int id) {
+        String sql = "UPDATE productos SET activo = FALSE WHERE id = (?) returning id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id";
        return conexion.sql(sql)
-            .param(activo)
             .param(id)
             .<Producto>query((rs, rowNum) -> new Producto(
                 rs.getInt("id"),

@@ -2,6 +2,7 @@ package mx.tecnm.backend.api.controllers;
 
 
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,9 +49,9 @@ public class CategoriaController {
 
 
 }
-    @PutMapping("/desactivar")
-    public ResponseEntity<List<Categoria>> desactivar(@RequestParam int id, @RequestParam boolean activo) {
-        List<Categoria> desactivar = repo.desactivar(id, activo);
+    @DeleteMapping()
+    public ResponseEntity<List<Categoria>> desactivar(@RequestParam int id) {
+        List<Categoria> desactivar = repo.desactivar(id);
         return ResponseEntity.ok(desactivar); 
 
     }

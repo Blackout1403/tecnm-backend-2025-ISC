@@ -18,7 +18,7 @@ public class CategoriaDAO {
    private JdbcClient conexion;
 
     public List<Categoria> consultarCategorias() {
-     String sql = "SELECT id, nombre FROM categorias";
+     String sql = "SELECT id, nombre FROM categorias WHERE activo = TRUE";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new Categoria(
             rs.getInt("id"),
@@ -40,7 +40,7 @@ public class CategoriaDAO {
     }
 
     public List<Categoria> busquedaID(int id) {
-     String sql = "SELECT * FROM categorias WHERE id = (?)";
+     String sql = "SELECT * FROM categorias WHERE id = (?) AND activo = TRUE";
      return conexion.sql(sql)
         .param(id)
         .query((rs, rowNum) -> new Categoria(
@@ -62,10 +62,9 @@ public class CategoriaDAO {
            
 
     }
-    public List<Categoria> desactivar(int id, boolean activo) {
-        String sql = "UPDATE categorias SET activo = (?) WHERE id = (?) returning id, nombre, activo";
+    public List<Categoria> desactivar(int id) {
+        String sql = "UPDATE categorias SET activo = FALSE WHERE id = (?) returning id, nombre, activo";
        return conexion.sql(sql)
-            .param(activo)
             .param(id)
             .query((rs, rowNum) -> new Categoria(
                 rs.getInt("id"),
