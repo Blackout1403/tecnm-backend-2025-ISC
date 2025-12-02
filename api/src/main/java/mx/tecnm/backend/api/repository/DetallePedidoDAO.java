@@ -15,14 +15,17 @@ public class DetallePedidoDAO {
     @Autowired
    private JdbcClient conexion;
 
-    public List<DetallePedido> consultarDetallePedidos() {
-     String sql = "SELECT id, cantidad, precio FROM detalles_pedido";
-     return conexion.sql(sql)
-        .query((rs, rowNum) -> new DetallePedido(
-            rs.getInt("id"),
-            rs.getString("cantidad"),
-            rs.getString("precio")))
-        .list();
+ public List<DetallePedido> consultarDetallePedidos () {
+        String sql = "SELECT id, cantidad, precio, productos_id, pedidos_id FROM detalles_pedido";
 
+        return conexion.sql(sql)
+                .query((rs, rowNum) -> new DetallePedido(
+                        rs.getInt("id"),
+                        rs.getInt("cantidad"),
+                        rs.getDouble("precio"),
+                        rs.getInt("productos_id"),
+                        rs.getInt("pedidos_id")
+                ))
+                .list();
     }
 }

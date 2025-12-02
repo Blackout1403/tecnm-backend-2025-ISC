@@ -21,8 +21,8 @@ public class PedidoController {
     PedidoDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<Pedido>> obtenerPedidos() {
-        List<Pedido> pedidos = repo.consultarPedidos();
+    public ResponseEntity<List<Pedido>> Consultarpedido() {
+        List<Pedido> pedidos = repo.Consultarpedido();
         return ResponseEntity.ok(pedidos);
     }
 }

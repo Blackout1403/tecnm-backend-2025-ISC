@@ -20,7 +20,7 @@ public class DetallePedidoController {
     DetallePedidoDAO repo;
 
     @GetMapping()
-    public ResponseEntity<List<DetallePedido>> obtenerDetallePedidos() {
+    public ResponseEntity<List<DetallePedido>> consultarDetallePedidos() {
         List<DetallePedido> detallePedidos = repo.consultarDetallePedidos();
         return ResponseEntity.ok(detallePedidos);
     }
