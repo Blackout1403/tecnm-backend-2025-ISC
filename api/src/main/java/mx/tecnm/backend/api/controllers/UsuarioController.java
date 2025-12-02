@@ -39,7 +39,13 @@ public class UsuarioController {
     public ResponseEntity<Usuario> actualizarUsuario(@RequestParam int id, @RequestParam String nombre, @RequestParam String email, @RequestParam String telefono, @RequestParam String sexo, @RequestParam java.sql.Date Fecha_nacimineto, @RequestParam String contrasena, @RequestParam java.sql.Date fecha_registro) {
         Usuario usuarioActualizado = repo.actualizarUsuario(id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro);
         return ResponseEntity.ok(usuarioActualizado);
-    }  
+    } 
+    
+    @GetMapping("/busquedaid")
+    public ResponseEntity<List<Usuario>> busquedaID(@RequestParam int id) {
+        List<Usuario> usuarios = repo.busquedaID(id);
+        return ResponseEntity.ok(usuarios);
+    }
 
 
 }
