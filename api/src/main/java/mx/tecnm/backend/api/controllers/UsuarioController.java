@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,5 +48,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
-
+    @DeleteMapping()
+    public ResponseEntity<List<Usuario>> eliminarUsuario(@RequestParam int id) {
+        List<Usuario> usuarioeliminado = repo.eliminarUsuario(id, false);
+        return ResponseEntity.ok(usuarioeliminado);
+    }
 }

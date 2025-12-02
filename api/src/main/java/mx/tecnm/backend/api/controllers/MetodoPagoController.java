@@ -39,4 +39,10 @@ public class MetodoPagoController {
         MetodoPago metodoPagoActualizado = repo.actualizarMetodoPago(id, nombre, comision);
         return ResponseEntity.ok(metodoPagoActualizado);
     }
+
+    @GetMapping("/busquedaid")
+    public ResponseEntity<MetodoPago> busquedaID(@RequestParam int id) {    
+        MetodoPago metodoPago = repo.obtenerMetodoPagoPorId(id);
+        return ResponseEntity.ok(metodoPago);
+    }
 }

@@ -14,7 +14,7 @@ public class MetodoPagoDAO {
    private JdbcClient conexion;
    
     public List<MetodoPago> consultarMetodosPago() {
-     String sql = "SELECT id, nombre, comision FROM metodos_pago";
+     String sql = "SELECT id, nombre, comision FROM metodos_pago WHERE activo = TRUE";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.MetodoPago(
             rs.getInt("id"),
@@ -51,7 +51,7 @@ public class MetodoPagoDAO {
 
 
     public MetodoPago obtenerMetodoPagoPorId(int id) {
-        String sql = "SELECT id, nombre, comision FROM metodos_pago WHERE id = ?";
+        String sql = "SELECT id, nombre, comision FROM metodos_pago WHERE id = ? AND activo = TRUE";
         return conexion.sql(sql)
             .param(id)
             .query((rs, rowNum) -> new MetodoPago(

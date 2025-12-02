@@ -14,7 +14,7 @@ public class UsuarioDAO {
    private JdbcClient conexion;
 
     public List<Usuario> consultarUsuario() {
-     String sql = "SELECT id, nombre FROM usuarios";
+     String sql = "SELECT id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro FROM usuarios WHERE activo = TRUE";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
             rs.getInt("id"),
@@ -76,7 +76,7 @@ public class UsuarioDAO {
     }
 
     public List<Usuario> busquedaID(int id) {
-     String sql = "SELECT * FROM usuarios WHERE id = (?)";
+     String sql = "SELECT * FROM usuarios WHERE id = (?) AND activo = TRUE";
      return conexion.sql(sql)
         .param(id)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
