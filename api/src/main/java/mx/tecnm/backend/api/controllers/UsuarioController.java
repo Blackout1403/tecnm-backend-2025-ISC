@@ -53,4 +53,7 @@ public class UsuarioController {
         List<Usuario> usuarioeliminado = repo.eliminarUsuario(id);
         return ResponseEntity.ok(usuarioeliminado);
     }
+
+
+
 }
