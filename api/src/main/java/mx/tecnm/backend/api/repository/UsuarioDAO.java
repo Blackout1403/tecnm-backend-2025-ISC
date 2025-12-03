@@ -91,11 +91,10 @@ public class UsuarioDAO {
         .list();
     }
 
-    public List<Usuario> eliminarUsuario(int id, boolean activo) {
-        String sql = "DELETE FROM usuarios WHERE id = (?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+    public List<Usuario> eliminarUsuario(int id) {
+        String sql = "UPDATE usuarios SET activo = FALSE WHERE id = (?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
        return conexion.sql(sql)
             .param(id)
-            .param(activo)
             .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
               rs.getInt("id"),
                 rs.getString("nombre"),

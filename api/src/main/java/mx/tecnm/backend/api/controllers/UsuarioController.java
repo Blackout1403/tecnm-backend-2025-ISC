@@ -50,7 +50,7 @@ public class UsuarioController {
 
     @DeleteMapping()
     public ResponseEntity<List<Usuario>> eliminarUsuario(@RequestParam int id) {
-        List<Usuario> usuarioeliminado = repo.eliminarUsuario(id, false);
+        List<Usuario> usuarioeliminado = repo.eliminarUsuario(id);
         return ResponseEntity.ok(usuarioeliminado);
     }
 }

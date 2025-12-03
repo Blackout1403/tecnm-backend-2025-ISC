@@ -60,4 +60,15 @@ public class MetodoPagoDAO {
                 rs.getDouble("comision")))
             .single();
     }
+
+    public List<MetodoPago> eliminarMetodoPago(int id) {
+        String sql = "UPDATE metodos_pago SET activo = FALSE WHERE id = (?) RETURNING id, nombre, comision";
+        return conexion.sql(sql)
+             .param(id)
+             .query((rs, rowNum) -> new mx.tecnm.backend.api.models.MetodoPago(
+               rs.getInt("id"),
+                 rs.getString("nombre"),
+                 rs.getDouble("comision")))
+         .list();
+     }
 }

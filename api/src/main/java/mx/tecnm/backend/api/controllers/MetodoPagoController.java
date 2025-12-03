@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,5 +45,11 @@ public class MetodoPagoController {
     public ResponseEntity<MetodoPago> busquedaID(@RequestParam int id) {    
         MetodoPago metodoPago = repo.obtenerMetodoPagoPorId(id);
         return ResponseEntity.ok(metodoPago);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<List<MetodoPago>> eliminarMetodoPago(@RequestParam int id) {
+        List<MetodoPago> metodopagoeliminado = repo.eliminarMetodoPago(id);
+        return ResponseEntity.ok(metodopagoeliminado);
     }
 }
