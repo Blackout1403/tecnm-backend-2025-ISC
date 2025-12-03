@@ -14,7 +14,7 @@ public class UsuarioDAO {
    private JdbcClient conexion;
 
     public List<Usuario> consultarUsuario() {
-     String sql = "SELECT id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro FROM usuarios WHERE activo = TRUE";
+     String sql = "SELECT id, nombre, email, telefono, sexo, Fecha_nacimiento, contrasena, fecha_registro FROM usuarios WHERE activo = TRUE";
      return conexion.sql(sql)
         .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
             rs.getInt("id"),
@@ -22,7 +22,7 @@ public class UsuarioDAO {
             rs.getString("email"),
             rs.getString("telefono"),
             rs.getString("sexo"),
-            rs.getDate("Fecha_nacimineto"),
+            rs.getDate("Fecha_nacimiento"),
             rs.getString("contrasena"),
             rs.getDate("fecha_registro")))
 
@@ -30,14 +30,14 @@ public class UsuarioDAO {
             
     }
 
-    public Usuario agregarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimineto, String contrasena, java.sql.Date fecha_registro) {
-        String sql = "INSERT INTO usuarios (nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro) VALUES (?,?,?,?,?,?,?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+    public Usuario agregarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimiento, String contrasena, java.sql.Date fecha_registro) {
+        String sql = "INSERT INTO usuarios (nombre, email, telefono, sexo, Fecha_nacimiento, contrasena, fecha_registro) VALUES (?,?,?,?,?,?,?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimiento, contrasena, fecha_registro";
         return conexion.sql(sql)
             .param(nombre)
             .param(email)
             .param(telefono)
             .param(sexo)
-            .param(Fecha_nacimineto)
+            .param(Fecha_nacimiento)
             .param(contrasena)
             .param(fecha_registro)
             .query((rs, rowNum) -> new Usuario(
@@ -52,15 +52,15 @@ public class UsuarioDAO {
             .single();
     }
 
-    public Usuario actualizarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimineto, String contrasena, java.sql.Date fecha_registro) {
-        String sql = "UPDATE usuarios SET nombre = (?), email = (?), telefono = (?), sexo = (?), fecha_nacimiento = (?), contrasena = (?), fecha_registro = (?) WHERE id = ? RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+    public Usuario actualizarUsuario(int id, String nombre, String email, String telefono, String sexo, java.sql.Date Fecha_nacimiento, String contrasena, java.sql.Date fecha_registro) {
+        String sql = "UPDATE usuarios SET nombre = (?), email = (?), telefono = (?), sexo = (?), fecha_nacimiento = (?), contrasena = (?), fecha_registro = (?) WHERE id = ? RETURNING id, nombre, email, telefono, sexo, Fecha_nacimiento, contrasena, fecha_registro";
         return conexion.sql(sql)
             .param(id)
             .param(nombre)
             .param(email)
             .param(telefono)
             .param(sexo)
-            .param(Fecha_nacimineto)
+            .param(Fecha_nacimiento)
             .param(contrasena)
             .param(fecha_registro)
             .query((rs, rowNum) -> new Usuario(
@@ -69,7 +69,7 @@ public class UsuarioDAO {
                 rs.getString("email"),
                 rs.getString("telefono"),
                 rs.getString("sexo"),
-                rs.getDate("Fecha_nacimineto"),
+                rs.getDate("Fecha_nacimiento"),
                 rs.getString("contrasena"),
                 rs.getDate("fecha_registro")))
             .single();
@@ -85,14 +85,14 @@ public class UsuarioDAO {
                 rs.getString("email"),
                 rs.getString("telefono"),
                 rs.getString("sexo"),
-                rs.getDate("Fecha_nacimineto"),
+                rs.getDate("Fecha_nacimiento"),
                 rs.getString("contrasena"),
                 rs.getDate("fecha_registro")))
         .list();
     }
 
     public List<Usuario> eliminarUsuario(int id) {
-        String sql = "UPDATE usuarios SET activo = FALSE WHERE id = (?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimineto, contrasena, fecha_registro";
+        String sql = "UPDATE usuarios SET activo = FALSE WHERE id = (?) RETURNING id, nombre, email, telefono, sexo, Fecha_nacimiento, contrasena, fecha_registro";
        return conexion.sql(sql)
             .param(id)
             .query((rs, rowNum) -> new mx.tecnm.backend.api.models.Usuario(
@@ -101,7 +101,7 @@ public class UsuarioDAO {
                 rs.getString("email"),
                 rs.getString("telefono"),
                 rs.getString("sexo"),
-                rs.getDate("Fecha_nacimineto"),
+                rs.getDate("Fecha_nacimiento"),
                 rs.getString("contrasena"),
                 rs.getDate("fecha_registro")))
             .list();

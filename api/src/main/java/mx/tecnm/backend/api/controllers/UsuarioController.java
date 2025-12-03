@@ -25,7 +25,7 @@ public class UsuarioController {
 
 
     @GetMapping()
-    public ResponseEntity<List<Usuario>> obtenerUsuario() {
+    public ResponseEntity<List<Usuario>> consultarUsuario() {
         List<Usuario> usuarios = repo.consultarUsuario();
         return ResponseEntity.ok(usuarios);
     } 
